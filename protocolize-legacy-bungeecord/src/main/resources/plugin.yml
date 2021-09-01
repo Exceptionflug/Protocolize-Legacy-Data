@@ -1,0 +1,6 @@
+name: ProtocolizeLegacySupport
+version: 1.0.0
+author: Exceptionflug
+depends: [Protocolize]
+
+main: dev.simplix.protocolize.legacy.bungee.LegacyPlugin
