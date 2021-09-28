@@ -26,11 +26,11 @@ import static dev.simplix.protocolize.api.util.ProtocolVersions.*;
 @Slf4j(topic = "ProtocolizeLegacySupport")
 public class LegacyModule implements ProtocolizeModule {
 
-    private final Map<ItemType, dev.simplix.protocolize.data.ItemType> replacementMap = new HashMap<>();
+    private final Map<ItemType, dev.simplix.protocolize.data.ItemType> itemMap = new HashMap<>();
 
     public LegacyModule() {
-        replacementMap.put(ItemType.ZOMBIE_PIGMAN_SPAWN_EGG, dev.simplix.protocolize.data.ItemType.ZOMBIFIED_PIGLIN_SPAWN_EGG);
-        replacementMap.put(ItemType.GRASS_PATH, dev.simplix.protocolize.data.ItemType.DIRT_PATH);
+        itemMap.put(ItemType.ZOMBIE_PIGMAN_SPAWN_EGG, dev.simplix.protocolize.data.ItemType.ZOMBIFIED_PIGLIN_SPAWN_EGG);
+        itemMap.put(ItemType.GRASS_PATH, dev.simplix.protocolize.data.ItemType.DIRT_PATH);
     }
 
     @Override
@@ -48,10 +48,11 @@ public class LegacyModule implements ProtocolizeModule {
                     continue;
                 }
                 try {
-                    dev.simplix.protocolize.data.Sound p2type = dev.simplix.protocolize.data.Sound.valueOf(sound.name());
+                    dev.simplix.protocolize.data.Sound p2type = dev.simplix.protocolize.data.Sound.valueOf(
+                        sound.name().replace("ZOMBIE_PIGMAN", "ZOMBIFIED_PIGLIN"));
                     mappingProvider.registerMapping(p2type, AbstractProtocolMapping.rangedStringMapping(i, i, soundName));
                 } catch (IllegalArgumentException e) {
-                    log.warn("Don't know what old sound " + sound + " is now.");
+                    log.debug("Don't know what old sound " + sound + " is now.");
                 }
             }
         }
@@ -75,8 +76,8 @@ public class LegacyModule implements ProtocolizeModule {
                         mapping = new LegacyItemProtocolIdMapping(i, i, applicableMapping.getId(), (short) applicableMapping.getData());
                     }
                     dev.simplix.protocolize.data.ItemType p2type;
-                    if (replacementMap.containsKey(type)) {
-                        p2type = replacementMap.get(type);
+                    if (itemMap.containsKey(type)) {
+                        p2type = itemMap.get(type);
                     } else {
                         p2type = dev.simplix.protocolize.data.ItemType.valueOf(type.name());
                     }
