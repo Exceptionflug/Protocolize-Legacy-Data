@@ -31,6 +31,7 @@ public class LegacyModule implements ProtocolizeModule {
     public LegacyModule() {
         itemMap.put(ItemType.ZOMBIE_PIGMAN_SPAWN_EGG, dev.simplix.protocolize.data.ItemType.ZOMBIFIED_PIGLIN_SPAWN_EGG);
         itemMap.put(ItemType.GRASS_PATH, dev.simplix.protocolize.data.ItemType.DIRT_PATH);
+        itemMap.put(ItemType.GRASS, dev.simplix.protocolize.data.ItemType.SHORT_GRASS);
     }
 
     @Override
