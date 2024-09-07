@@ -51,7 +51,7 @@ public class LegacyModule implements ProtocolizeModule {
                 try {
                     dev.simplix.protocolize.data.Sound p2type = dev.simplix.protocolize.data.Sound.valueOf(
                         sound.name().replace("ZOMBIE_PIGMAN", "ZOMBIFIED_PIGLIN"));
-                    mappingProvider.registerMapping(p2type, AbstractProtocolMapping.rangedStringMapping(i, i, soundName));
+                    mappingProvider.registerMapping(p2type, AbstractProtocolMapping.rangedStringMapping(i, i, soundName, -1));
                 } catch (IllegalArgumentException e) {
                     log.debug("Don't know what old sound " + sound + " is now.");
                 }
